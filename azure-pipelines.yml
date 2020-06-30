@@ -45,6 +45,13 @@ steps:
     arguments: '--no-restore --configuration $(buildConfiguration)'
     projects: '**/*.csproj'
 
+- task: CmdLine@2
+  inputs:
+    script: |
+      curl -LJO https://github.com/whitesource/unified-agent-distribution/releases/latest/download/wss-unified-agent.jar
+        
+      java -jar wss-unified-agent.jar -c wss-unified-agent.config -apiKey 3f838042f9e54c21ab90c2c00318c70577adb81d443942eda7b00b9b4bc641ef -product Tailspin -project TailspinProject
+
 - task: DotNetCoreCLI@2
   displayName: 'Install .NET Core tools from local manifest'
   inputs:
